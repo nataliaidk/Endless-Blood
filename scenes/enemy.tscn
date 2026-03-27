@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://cwpu70mh6miqo"]
 
 [ext_resource type="Script" uid="uid://b5baw3330n8b0" path="res://scripts/enemy.gd" id="1_4gyqm"]
+[ext_resource type="Texture2D" uid="uid://dqyv1nejjaco1" path="res://assets/sprites/healthbar_background.png" id="2_5uy6h"]
 [ext_resource type="Texture2D" uid="uid://cv2gs2mbam6s1" path="res://assets/sprites/Huntsman.png" id="2_md0e3"]
+[ext_resource type="Texture2D" uid="uid://kuheauej3ubv" path="res://assets/sprites/healthbar_progress.png" id="3_c4w8v"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_md0e3"]
 atlas = ExtResource("2_md0e3")
@@ -96,7 +98,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4ra3w")
 }],
-"loop": true,
+"loop": false,
 "name": &"die",
 "speed": 1.0
 }, {
@@ -178,6 +180,10 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_md0e3"]
+radius = 23.0
+height = 70.0
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4ra3w"]
 radius = 19.0
 height = 60.0
@@ -186,22 +192,32 @@ height = 60.0
 y_sort_enabled = true
 collision_layer = 2
 collision_mask = 3
+platform_on_leave = 2
+platform_floor_layers = 4294901760
 script = ExtResource("1_4gyqm")
 
-[node name="ProgressBar" type="ProgressBar" parent="." unique_id=144311692]
-offset_left = -35.0
-offset_top = 58.0
-offset_right = 46.0
-offset_bottom = 67.0
-max_value = 20.0
-show_percentage = false
+[node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=926257288]
+offset_left = -39.0
+offset_top = 57.0
+offset_right = 53.0
+offset_bottom = 97.0
+texture_under = ExtResource("2_5uy6h")
+texture_progress = ExtResource("3_c4w8v")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=891506310]
 scale = Vector2(0.6, 0.6)
 sprite_frames = SubResource("SpriteFrames_ipns3")
 animation = &"walk_down"
-frame_progress = 0.5030818
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=1799178899]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=845764093]
+shape = SubResource("CapsuleShape2D_md0e3")
+debug_color = Color(0.8902925, 0.22565496, 0.594003, 0.41960785)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1962211900]
 shape = SubResource("CapsuleShape2D_4ra3w")
-debug_color = Color(0.83042645, 0.3375644, 0.5313467, 0.41960785)
+debug_color = Color(0, 0.6, 0.7019608, 0.41960785)
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
