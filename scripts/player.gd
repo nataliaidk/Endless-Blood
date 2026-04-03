@@ -3,6 +3,8 @@ extends CharacterBody2D
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var camera := $Camera2D
 @onready var health_bar: TextureProgressBar = $TextureProgressBar
+@onready var weapon_manager: WeaponManager = $WeaponManager
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 var speed := 200.0
 var max_health := 100

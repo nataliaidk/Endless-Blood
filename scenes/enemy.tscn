@@ -220,4 +220,8 @@ debug_color = Color(0.8902925, 0.22565496, 0.594003, 0.41960785)
 shape = SubResource("CapsuleShape2D_4ra3w")
 debug_color = Color(0, 0.6, 0.7019608, 0.41960785)
 
+[node name="DamageTimer" type="Timer" parent="." unique_id=1591395709]
+
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="body_exited" from="Hitbox" to="." method="_on_hitbox_body_exited"]
+[connection signal="timeout" from="DamageTimer" to="." method="_on_damage_timer_timeout"]

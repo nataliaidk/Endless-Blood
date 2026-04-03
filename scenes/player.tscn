@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dqyv1nejjaco1" path="res://assets/sprites/healthbar_background.png" id="2_dqkch"]
 [ext_resource type="Texture2D" uid="uid://bu7gkcmm4cjs8" path="res://assets/sprites/Blood_Hunter.png" id="2_onrkg"]
 [ext_resource type="Texture2D" uid="uid://kuheauej3ubv" path="res://assets/sprites/healthbar_progress.png" id="3_qlg0r"]
+[ext_resource type="Script" uid="uid://g1dq0i8rmfpm" path="res://scripts/weapon_manager.gd" id="5_qlg0r"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
 atlas = ExtResource("2_onrkg")
@@ -219,9 +220,9 @@ script = ExtResource("1_ij6vw")
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1800044419]
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=1762087543]
-offset_left = -44.0
+offset_left = -41.0
 offset_top = 47.0
-offset_right = 48.0
+offset_right = 51.0
 offset_bottom = 87.0
 texture_under = ExtResource("2_dqkch")
 texture_progress = ExtResource("3_qlg0r")
@@ -235,3 +236,6 @@ animation = &"idle"
 y_sort_enabled = true
 position = Vector2(1, 0)
 shape = SubResource("CapsuleShape2D_b26j0")
+
+[node name="WeaponManager" type="Node2D" parent="." unique_id=101019310]
+script = ExtResource("5_qlg0r")
