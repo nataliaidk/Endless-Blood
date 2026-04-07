@@ -17,7 +17,7 @@ func _do_attack() -> void:
 	#slash.rotation = angle
 	#get_tree().current_scene.add_child(slash)
 	
-	var dir = Vector2(player.facing_direction, 0)
+	var dir = player.facing_direction
 	var angle = dir.angle()
 	_play_attack_animation(dir)
 	var slash = slash_scene.instantiate()

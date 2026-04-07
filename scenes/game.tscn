@@ -3,6 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://cgixofxjk8ylm" path="res://scenes/player.tscn" id="1_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://c1nbty17pl3sx" path="res://scenes/enemy_spawner.tscn" id="2_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://cwpu70mh6miqo" path="res://scenes/enemy.tscn" id="3_iywne"]
+[ext_resource type="Texture2D" uid="uid://c14q58q1bw1dv" path="res://assets/sprites/map.png" id="4_lbhrr"]
+[ext_resource type="PackedScene" path="res://scenes/rat.tscn" id="5_rat"]
 
 [node name="Game" type="Node2D" unique_id=1073483244]
 y_sort_enabled = true
@@ -12,3 +14,16 @@ y_sort_enabled = true
 [node name="EnemySpawner" parent="." unique_id=662883454 instance=ExtResource("2_lbhrr")]
 y_sort_enabled = true
 enemy_scene = ExtResource("3_iywne")
+rat_scene = ExtResource("5_rat")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=1356533601]
+scroll_ignore_camera_zoom = true
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground" unique_id=2059012424]
+motion_scale = Vector2(0, 0)
+motion_mirroring = Vector2(1536, 1024)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer" unique_id=1544682911]
+texture = ExtResource("4_lbhrr")
+centered = true
+z_index = -100

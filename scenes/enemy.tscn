@@ -188,7 +188,7 @@ height = 70.0
 radius = 19.0
 height = 60.0
 
-[node name="Enemy" type="CharacterBody2D" unique_id=889554033]
+[node name="Enemy" type="CharacterBody2D" unique_id=889554033 groups=["enemies"]]
 y_sort_enabled = true
 collision_layer = 2
 collision_mask = 3

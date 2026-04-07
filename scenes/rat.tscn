@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/rat.gd" id="1_rat"]
+[ext_resource type="Texture2D" uid="uid://dqyv1nejjaco1" path="res://assets/sprites/healthbar_background.png" id="2_hb_bg"]
+[ext_resource type="Texture2D" uid="uid://kuheauej3ubv" path="res://assets/sprites/healthbar_progress.png" id="3_hb_fg"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_body"]
+radius = 8.0
+height = 24.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hit"]
+radius = 16.0
+
+[node name="Rat" type="CharacterBody2D" groups=["enemies"]]
+y_sort_enabled = true
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_rat")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+offset_left = -26.0
+offset_top = 14.0
+offset_right = 26.0
+offset_bottom = 32.0
+scale = Vector2(0.55, 0.55)
+texture_under = ExtResource("2_hb_bg")
+texture_progress = ExtResource("3_hb_fg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.95, 0.95)
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_hit")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_body")
+
+[node name="DamageTimer" type="Timer" parent="."]
+wait_time = 0.9
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="body_exited" from="Hitbox" to="." method="_on_hitbox_body_exited"]
+[connection signal="timeout" from="DamageTimer" to="." method="_on_damage_timer_timeout"]
