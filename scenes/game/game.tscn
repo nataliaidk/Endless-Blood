@@ -1,12 +1,20 @@
 [gd_scene format=3 uid="uid://dned6v81jglad"]
 
 [ext_resource type="PackedScene" uid="uid://cgixofxjk8ylm" path="res://scenes/player/player.tscn" id="1_7h61r"]
+[ext_resource type="Script" uid="uid://bc03w8bjncwi1" path="res://scripts/game/game.gd" id="1_kelw5"]
 [ext_resource type="PackedScene" uid="uid://c1nbty17pl3sx" path="res://scenes/game/enemy_spawner.tscn" id="2_0sr1o"]
+[ext_resource type="AudioStream" uid="uid://cev202yop7q8j" path="res://assets/music/Unholy Invocation.mp3" id="4_lfrn8"]
 
 [node name="Game" type="Node2D" unique_id=1073483244]
 y_sort_enabled = true
+script = ExtResource("1_kelw5")
 
 [node name="Player" parent="." unique_id=1140903298 instance=ExtResource("1_7h61r")]
 
 [node name="EnemySpawner" parent="." unique_id=662883454 instance=ExtResource("2_0sr1o")]
 y_sort_enabled = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=937717410]
+stream = ExtResource("4_lfrn8")
+volume_db = -15.0
+autoplay = true

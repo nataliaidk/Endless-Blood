@@ -71,7 +71,9 @@ func _roll_choices() -> Array[Dictionary]:
 			available.append(u)
 	var source := available if available.size() >= 3 else WEAPON_UPGRADE_POOL.duplicate(true)
 	source.shuffle()
-	return source.slice(0, 3)
+	var result: Array[Dictionary] = []
+	result.assign(source.slice(0, 3))
+	return result
 
 func _required_blood(target_level: int) -> int:
 	return max(1, target_level * 2 - 1)

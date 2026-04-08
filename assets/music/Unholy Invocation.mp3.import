@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cev202yop7q8j"
+path="res://.godot/imported/Unholy Invocation.mp3-db5e196ab362c99047f972b1f6ba811b.mp3str"
+
+[deps]
+
+source_file="res://assets/music/Unholy Invocation.mp3"
+dest_files=["res://.godot/imported/Unholy Invocation.mp3-db5e196ab362c99047f972b1f6ba811b.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
