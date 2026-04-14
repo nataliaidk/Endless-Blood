@@ -92,7 +92,7 @@ func die():
 func gain_blood_exp(amount: int):
 	if is_dead or amount <= 0:
 		return
-	# exp_gained.emit(amount)
+	exp_gained.emit(amount)
 
 func get_level() -> int:
 	return leveling.player_level

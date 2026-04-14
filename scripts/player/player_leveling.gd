@@ -4,13 +4,21 @@ signal level_up_ready(choices: Array[Dictionary])
 signal upgrade_applied(upgrade: Dictionary)
 
 const WEAPON_UPGRADE_POOL := [
-	{"id": "hunter_axe",    "name": "Hunter Axe",     "damage_bonus": 30, "range_bonus": 10.0, "icon_cell": Vector2i(0, 0)},
-	{"id": "saw_cleaver",   "name": "Saw Cleaver",     "damage_bonus": 28, "range_bonus": 16.0, "icon_cell": Vector2i(1, 0)},
-	{"id": "kirkhammer",    "name": "Kirkhammer",      "damage_bonus": 40, "range_bonus":  6.0, "icon_cell": Vector2i(2, 0)},
-	{"id": "threaded_cane", "name": "Threaded Cane",   "damage_bonus": 20, "range_bonus": 26.0, "icon_cell": Vector2i(3, 0)},
-	{"id": "ludwig_blade",  "name": "Ludwig's Blade",  "damage_bonus": 35, "range_bonus": 14.0, "icon_cell": Vector2i(0, 1)},
-	{"id": "beast_claw",    "name": "Beast Claw",      "damage_bonus": 27, "range_bonus": 20.0, "icon_cell": Vector2i(1, 1)},
+	{"id": "hunter_axe",    "name": "Divine Water",     "damage_bonus": 5, "range_bonus": 10.0, "icon_cell": Vector2i(0, 0)},
+	{"id": "saw_cleaver",   "name": "King Bible",     "damage_bonus": 4, "range_bonus": 16.0, "icon_cell": Vector2i(1, 0)},
+	{"id": "kirkhammer",    "name": "Torch",      "damage_bonus": 4, "range_bonus":  6.0, "icon_cell": Vector2i(2, 0)},
+	{"id": "threaded_cane", "name": "Molotof Cocktails",   "damage_bonus": 3, "range_bonus": 26.0, "icon_cell": Vector2i(3, 0)},
+	{"id": "ludwig_blade",  "name": "Consecrates Knives",  "damage_bonus": 5, "range_bonus": 14.0, "icon_cell": Vector2i(0, 1)},
+	{"id": "beast_claw",    "name": "Blunderbuss",      "damage_bonus": 3, "range_bonus": 20.0, "icon_cell": Vector2i(1, 1)},
 ]
+
+const FALLBACK_UPGRADE := {
+	"id": "endless_blood_echo",
+	"name": "Blood Echo",
+	"damage_bonus": 2,
+	"range_bonus": 6.0,
+	"icon_cell": Vector2i(0, 0),
+}
 
 @export var heal_percent_on_kill := 0.07
 @export var axe_damage := 55
@@ -22,6 +30,8 @@ const WEAPON_UPGRADE_POOL := [
 var blood_exp := 0
 var player_level := 0
 var unlocked_upgrade_ids: Array[String] = []
+var _weapon_damage_bonus := 0
+var _weapon_range_bonus := 0.0
 
 var _pending_requirement := 0
 var _in_progress := false
@@ -41,9 +51,20 @@ func _try_trigger_level_up():
 		return
 	var requirement := _required_blood(player_level + 1)
 	if blood_exp >= requirement:
+		var choices := _roll_choices()
+		if choices.is_empty():
+			_pending_requirement = requirement
+			_in_progress = true
+			_apply_upgrade(FALLBACK_UPGRADE)
+			blood_exp = max(0, blood_exp - _pending_requirement)
+			player_level += 1
+			_pending_requirement = 0
+			_in_progress = false
+			_try_trigger_level_up()
+			return
 		_pending_requirement = requirement
 		_in_progress = true
-		level_up_ready.emit(_roll_choices())
+		level_up_ready.emit(choices)
 
 func on_upgrade_chosen(choice_index: int, choices: Array[Dictionary]):
 	if choice_index < 0 or choice_index >= choices.size():
@@ -57,22 +78,23 @@ func on_upgrade_chosen(choice_index: int, choices: Array[Dictionary]):
 	_try_trigger_level_up()
 
 func _apply_upgrade(upgrade: Dictionary):
-	axe_damage += int(upgrade.get("damage_bonus", 0))
-	axe_range  += float(upgrade.get("range_bonus", 0.0))
+	_weapon_damage_bonus += int(upgrade.get("damage_bonus", 0))
+	_weapon_range_bonus  += float(upgrade.get("range_bonus", 0.0))
+	if player.weapon_manager != null and player.weapon_manager.has_method("set_weapon_bonuses"):
+		player.weapon_manager.set_weapon_bonuses(_weapon_damage_bonus, _weapon_range_bonus)
 	var id := str(upgrade.get("id", ""))
 	if not unlocked_upgrade_ids.has(id):
 		unlocked_upgrade_ids.append(id)
 	upgrade_applied.emit(upgrade)
 
 func _roll_choices() -> Array[Dictionary]:
-	var available: Array[Dictionary] = []
-	for u in WEAPON_UPGRADE_POOL:
-		if not unlocked_upgrade_ids.has(str(u["id"])):
-			available.append(u)
-	var source := available if available.size() >= 3 else WEAPON_UPGRADE_POOL.duplicate(true)
-	source.shuffle()
+	if WEAPON_UPGRADE_POOL.is_empty():
+		return []
+	var source := WEAPON_UPGRADE_POOL.duplicate(true)
 	var result: Array[Dictionary] = []
-	result.assign(source.slice(0, 3))
+	while result.size() < 3:
+		source.shuffle()
+		result.append(source[0])
 	return result
 
 func _required_blood(target_level: int) -> int:

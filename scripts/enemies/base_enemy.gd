@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 @onready var player: Node2D = get_tree().get_first_node_in_group("player")
 @export var blood_exp_reward := 1
+const DAMAGE_FONT: FontFile = preload("res://assets/fonts/Gothikka.ttf")
 
 var speed := 100.0
 var max_health := 100
@@ -48,6 +49,7 @@ func flash_red():
 func take_damage(attack: Attack) -> void:
 	if is_dead:
 		return
+	_show_damage_number(attack.damage)
 	health -= attack.damage
 	_spawn_blood(blood_lifetime * 0.8, 16.0)
 	flash_red()
@@ -115,3 +117,29 @@ func _spawn_blood(lifetime: float, vel_min: float) -> void:
 	await get_tree().create_timer(p.lifetime + 0.3).timeout
 	if is_instance_valid(p):
 		p.queue_free()
+
+func _show_damage_number(amount: int) -> void:
+	if amount <= 0:
+		return
+	var label := Label.new()
+	label.text = str(amount)
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	label.add_theme_font_override("font", DAMAGE_FONT)
+	label.add_theme_font_size_override("font_size", 28)
+	label.add_theme_color_override("font_color", Color(1.0, 0.92, 0.82, 1.0))
+	label.add_theme_color_override("font_outline_color", Color(0.32, 0.0, 0.0, 1.0))
+	label.add_theme_constant_override("outline_size", 4)
+	label.top_level = true
+	label.z_index = 35
+	label.global_position = global_position + Vector2(randf_range(-12.0, 12.0), -18.0)
+	get_tree().current_scene.add_child(label)
+
+	var tween := label.create_tween()
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(label, "global_position", label.global_position + Vector2(0, -42), 0.55)
+	tween.parallel().tween_property(label, "modulate:a", 0.0, 0.55)
+	await tween.finished
+	if is_instance_valid(label):
+		label.queue_free()
