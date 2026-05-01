@@ -283,14 +283,15 @@ script = ExtResource("11_fm80t")
 script = ExtResource("7_fjrip")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=446460250]
-volume_db = -8.0
+volume_db = -10.0
 
 [node name="LevelingAudioPlayer" type="AudioStreamPlayer" parent="." unique_id=1050267213]
 stream = ExtResource("12_fm80t")
+volume_db = 5.0
 
 [node name="LevelUpAudioPlayer" type="AudioStreamPlayer" parent="." unique_id=2029841942]
 process_mode = 3
 stream = ExtResource("14_ugbui")
-volume_db = -20.0
+volume_db = -15.0
 
 [node name="ButtonsAudioPlayer" type="AudioStreamPlayer" parent="." unique_id=1464709795]

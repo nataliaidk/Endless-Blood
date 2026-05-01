@@ -28,7 +28,13 @@ corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 shadow_size = 5
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dj74p"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gf2gt"]
+bg_color = Color(0.2231029, 0.2231029, 0.22310287, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 5
 
 [node name="DeathScreen" type="Control" unique_id=241632319]
 process_mode = 3
@@ -114,7 +120,7 @@ theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_7egq5")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_6fo52")
 theme_override_styles/hover = SubResource("StyleBoxFlat_fgmf1")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_dj74p")
+theme_override_styles/focus = SubResource("StyleBoxFlat_gf2gt")
 text = "Back"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=11315528]

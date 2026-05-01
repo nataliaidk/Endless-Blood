@@ -33,6 +33,8 @@ func _physics_process(delta: float) -> void:
 
 	if dist <= magnet_radius:
 		_attracted = true
+	else:
+		_attracted = false
 
 	if _attracted:
 		var dir := global_position.direction_to(_player.global_position)

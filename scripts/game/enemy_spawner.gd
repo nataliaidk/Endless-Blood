@@ -38,7 +38,7 @@ func _on_timer_timeout() -> void:
 	var player := get_tree().get_first_node_in_group("player")
 	if not player:
 		return
-	var t := GameTimer.elapsed
+	var t : float = GameTimer.elapsed
 	var entry := _pick_entry(t)
 	if entry == null:
 		return
