@@ -33,7 +33,21 @@ corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 shadow_size = 5
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6hh85"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3r4tm"]
+bg_color = Color(0.2231029, 0.2231029, 0.22310287, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gfgjs"]
+bg_color = Color(0.2231029, 0.2231029, 0.22310287, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 5
 
 [node name="MainMenu" type="Control" unique_id=1149567354]
 layout_mode = 3
@@ -81,7 +95,7 @@ theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_fpthd")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_bto60")
 theme_override_styles/hover = SubResource("StyleBoxFlat_16onh")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_6hh85")
+theme_override_styles/focus = SubResource("StyleBoxFlat_3r4tm")
 text = "Start game"
 
 [node name="Exit" type="Button" parent="VBoxContainer" unique_id=1381819829]
@@ -97,7 +111,7 @@ theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_fpthd")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_bto60")
 theme_override_styles/hover = SubResource("StyleBoxFlat_16onh")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_6hh85")
+theme_override_styles/focus = SubResource("StyleBoxFlat_gfgjs")
 text = "Exit
 "
 

@@ -27,11 +27,17 @@ corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 shadow_size = 5
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hy1ln"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w8b6s"]
+bg_color = Color(0.2231029, 0.2231029, 0.22310287, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 5
 
 [node name="PauseScreen" type="CanvasLayer" unique_id=1792680621]
 process_mode = 3
-layer = 10
+layer = 22
 script = ExtResource("1_si62t")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=28577035]
@@ -75,6 +81,7 @@ offset_right = 87.5
 offset_bottom = 186.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/separation = 16
 
 [node name="ResumeButton" type="Button" parent="VBoxContainer" unique_id=1197629690]
@@ -92,7 +99,7 @@ theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_ywadr")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_nmxm4")
 theme_override_styles/hover = SubResource("StyleBoxFlat_8kdd8")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_hy1ln")
+theme_override_styles/focus = SubResource("StyleBoxFlat_w8b6s")
 text = "Resume"
 
 [node name="QuitButton" type="Button" parent="VBoxContainer" unique_id=1625776958]
@@ -110,7 +117,7 @@ theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_ywadr")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_nmxm4")
 theme_override_styles/hover = SubResource("StyleBoxFlat_8kdd8")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_hy1ln")
+theme_override_styles/focus = SubResource("StyleBoxFlat_8kdd8")
 text = "Quit"
 
 [node name="AudioStreamPlayerButton" type="AudioStreamPlayer" parent="." unique_id=361323280]
