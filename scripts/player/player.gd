@@ -88,7 +88,7 @@ func die():
 	get_tree().change_scene_to_file("res://scenes/game/death_screen.tscn")
 
 func add_kill():
-	$HUD.add_kill()
+	$PlayerHud.add_kill()
 
 func gain_xp(amount: int):
 	if is_dead or amount <= 0:

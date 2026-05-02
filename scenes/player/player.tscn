@@ -13,6 +13,8 @@
 [ext_resource type="Script" uid="uid://ctw5aasp0qrnv" path="res://scripts/leveling/level_up_menu.gd" id="7_fjrip"]
 [ext_resource type="Script" uid="uid://c6ihn5a7s3o0y" path="res://scripts/player/player_hud.gd" id="11_fm80t"]
 [ext_resource type="AudioStream" uid="uid://bi70lqwsprl26" path="res://assets/sounds/xp_gained.mp3" id="12_fm80t"]
+[ext_resource type="FontFile" uid="uid://ch3oxkxxaq75j" path="res://assets/fonts/Gothikka.ttf" id="12_myrg7"]
+[ext_resource type="Texture2D" uid="uid://7v62mahm2sut" path="res://assets/ui/skull.png" id="13_kvlxm"]
 [ext_resource type="AudioStream" uid="uid://dsoqnkd65nv28" path="res://assets/sounds/level_up.mp3" id="14_ugbui"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
@@ -224,6 +226,24 @@ height = 58.0
 radius = 11.0
 height = 34.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uf5tr"]
+bg_color = Color(0.08235294, 0.08235294, 0.08235294, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lgqa7"]
+bg_color = Color(0.8627451, 0.078431375, 0.23529412, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8ydkj"]
+bg_color = Color(0.08235294, 0.08235294, 0.08235294, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.44755095, 0.447551, 0.44755077, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
 [node name="Player" type="CharacterBody2D" unique_id=1140903298 groups=["player"]]
 z_index = 1
 collision_layer = 8
@@ -276,8 +296,142 @@ script = ExtResource("5_qlg0r")
 [node name="PlayerLeveling" type="Node2D" parent="." unique_id=343121902]
 script = ExtResource("6_tuyoq")
 
-[node name="HUD" type="CanvasLayer" parent="." unique_id=513230100]
+[node name="PlayerHud" type="CanvasLayer" parent="." unique_id=70834009]
 script = ExtResource("11_fm80t")
+
+[node name="ExpBar" type="ProgressBar" parent="PlayerHud" unique_id=224946098]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 20)
+offset_right = 1500.0
+offset_bottom = 20.0
+theme_override_styles/background = SubResource("StyleBoxFlat_uf5tr")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lgqa7")
+max_value = 1.0
+show_percentage = false
+
+[node name="EquipmentContainer" type="VBoxContainer" parent="PlayerHud" unique_id=998922981]
+offset_left = 12.0
+offset_top = 667.0
+offset_right = 308.0
+offset_bottom = 787.0
+size_flags_horizontal = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerHud/EquipmentContainer" unique_id=657732743]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="WeaponSlot0" type="Panel" parent="PlayerHud/EquipmentContainer/HBoxContainer" unique_id=1241660461]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8ydkj")
+
+[node name="WeaponSlot1" type="Panel" parent="PlayerHud/EquipmentContainer/HBoxContainer" unique_id=1505614052]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8ydkj")
+
+[node name="WeaponSlot2" type="Panel" parent="PlayerHud/EquipmentContainer/HBoxContainer" unique_id=2055313502]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8ydkj")
+
+[node name="WeaponSlot3" type="Panel" parent="PlayerHud/EquipmentContainer/HBoxContainer" unique_id=1858133569]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8ydkj")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PlayerHud/EquipmentContainer" unique_id=227153642]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="ItemSlot0" type="Panel" parent="PlayerHud/EquipmentContainer/HBoxContainer2" unique_id=656167417]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(46, 46)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8ydkj")
+
+[node name="ItemSlot1" type="Panel" parent="PlayerHud/EquipmentContainer/HBoxContainer2" unique_id=1599717613]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(46, 46)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8ydkj")
+
+[node name="ItemSlot2" type="Panel" parent="PlayerHud/EquipmentContainer/HBoxContainer2" unique_id=430662752]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(46, 46)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8ydkj")
+
+[node name="ItemSlot3" type="Panel" parent="PlayerHud/EquipmentContainer/HBoxContainer2" unique_id=926819005]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(46, 46)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8ydkj")
+
+[node name="ItemSlot4" type="Panel" parent="PlayerHud/EquipmentContainer/HBoxContainer2" unique_id=1776093271]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(46, 46)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8ydkj")
+
+[node name="ItemSlot5" type="Panel" parent="PlayerHud/EquipmentContainer/HBoxContainer2" unique_id=1617507956]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(46, 46)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8ydkj")
+
+[node name="LevelLabel" type="Label" parent="PlayerHud" unique_id=1412567820]
+unique_name_in_owner = true
+offset_left = 10.0
+offset_top = 27.0
+offset_right = 54.0
+offset_bottom = 58.0
+theme_override_fonts/font = ExtResource("12_myrg7")
+theme_override_font_sizes/font_size = 30
+text = "LVL 1"
+
+[node name="TimeLabel" type="Label" parent="PlayerHud" unique_id=1505982148]
+unique_name_in_owner = true
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -18.0
+offset_top = 27.0
+offset_right = 19.0
+offset_bottom = 58.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("12_myrg7")
+theme_override_font_sizes/font_size = 30
+text = "0:00"
+
+[node name="KillsLabel" type="Label" parent="PlayerHud" unique_id=1339451547]
+unique_name_in_owner = true
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -81.0
+offset_top = 28.0
+offset_right = -44.0
+offset_bottom = 59.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("12_myrg7")
+theme_override_font_sizes/font_size = 30
+text = "0"
+horizontal_alignment = 2
+
+[node name="Skull" type="TextureRect" parent="PlayerHud" unique_id=1531068491]
+custom_minimum_size = Vector2(24, 24)
+offset_left = 1461.0
+offset_top = 28.0
+offset_right = 1491.0
+offset_bottom = 58.0
+size_flags_horizontal = 4
+texture = ExtResource("13_kvlxm")
 
 [node name="LevelUpMenu" type="CanvasLayer" parent="." unique_id=1698592873]
 script = ExtResource("7_fjrip")

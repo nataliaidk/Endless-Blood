@@ -1,6 +1,8 @@
 class_name WeaponManager
 extends Node
 
+signal weapon_added(weapon_data: WeaponData)
+
 const MAX_WEAPONS = 4
 var active_weapons: Array[BaseWeapon] = []
 var weapon_damage_bonus: int = 0
@@ -22,6 +24,7 @@ func add_weapon(weapon_data: WeaponData) -> bool:
 	weapon_node.setup(weapon_data, player)
 	_apply_bonuses_to_weapon(weapon_node)
 	active_weapons.append(weapon_node)
+	weapon_added.emit(weapon_data)
 	return true
 
 func set_weapon_bonuses(damage_bonus: int, range_bonus: float) -> void:

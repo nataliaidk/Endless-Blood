@@ -58,7 +58,7 @@ func _build_visuals(cfg: Dictionary) -> void:
 	var color: Color = cfg["color"]
 
 	var ball := _GemBall.new(r, color)
-	ball.z_index = 10
+	ball.z_index = 1
 	add_child(ball)
 
 	var tween := create_tween().set_loops()
